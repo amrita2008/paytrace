@@ -80,3 +80,4 @@ coverage.xml
 
 # Byte-compiled
 *.pyc
+.freebuff/
