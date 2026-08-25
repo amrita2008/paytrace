@@ -1,0 +1,82 @@
+# ============================================
+# PayTrace .gitignore
+# Python + FastAPI Backend & Modern Frontend
+# ============================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# FastAPI
+*.log
+*.sqlite3
+
+# Node.js / Frontend
+node_modules/
+.next/
+.nuxt/
+out/
+dist/
+build/
+*.tsbuildinfo
+.eslintcache
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# mypy
+.mypy_cache/
+
+# Pyre
+.pyre/
+
+# Byte-compiled
+*.pyc
