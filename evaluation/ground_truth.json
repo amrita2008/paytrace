@@ -1,0 +1,521 @@
+{
+  "seed": 20260826,
+  "record_counts": {
+    "payments": 55,
+    "settlements": 18,
+    "bank_entries": 22
+  },
+  "match_groups": [
+    {
+      "group_id": "G-0001",
+      "payment_ids": [
+        "PAY-0001",
+        "PAY-0002",
+        "PAY-0003",
+        "PAY-0004"
+      ],
+      "settlement_ids": [
+        "SETL-0001"
+      ],
+      "bank_entry_ids": [
+        "BANK-0001"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 4 payments INR 600.00 -> SETL-0001 -> BANK-0001"
+    },
+    {
+      "group_id": "G-0002",
+      "payment_ids": [
+        "PAY-0005",
+        "PAY-0006",
+        "PAY-0007"
+      ],
+      "settlement_ids": [
+        "SETL-0002"
+      ],
+      "bank_entry_ids": [
+        "BANK-0002"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 3 payments INR 600.00 -> SETL-0002 -> BANK-0002"
+    },
+    {
+      "group_id": "G-0003",
+      "payment_ids": [
+        "PAY-0008",
+        "PAY-0009",
+        "PAY-0010",
+        "PAY-0011"
+      ],
+      "settlement_ids": [
+        "SETL-0003"
+      ],
+      "bank_entry_ids": [
+        "BANK-0003"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 4 payments INR 470.00 -> SETL-0003 -> BANK-0003"
+    },
+    {
+      "group_id": "G-0004",
+      "payment_ids": [
+        "PAY-0012",
+        "PAY-0013",
+        "PAY-0014"
+      ],
+      "settlement_ids": [
+        "SETL-0004"
+      ],
+      "bank_entry_ids": [
+        "BANK-0004"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 3 payments INR 335.00 -> SETL-0004 -> BANK-0004"
+    },
+    {
+      "group_id": "G-0005",
+      "payment_ids": [
+        "PAY-0015",
+        "PAY-0016",
+        "PAY-0017"
+      ],
+      "settlement_ids": [
+        "SETL-0005"
+      ],
+      "bank_entry_ids": [
+        "BANK-0005"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 3 payments INR 330.00 -> SETL-0005 -> BANK-0005"
+    },
+    {
+      "group_id": "G-0006",
+      "payment_ids": [
+        "PAY-0018",
+        "PAY-0019",
+        "PAY-0020"
+      ],
+      "settlement_ids": [
+        "SETL-0006"
+      ],
+      "bank_entry_ids": [
+        "BANK-0006"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 3 payments INR 540.00 -> SETL-0006 -> BANK-0006"
+    },
+    {
+      "group_id": "G-0007",
+      "payment_ids": [
+        "PAY-0021",
+        "PAY-0022",
+        "PAY-0023"
+      ],
+      "settlement_ids": [
+        "SETL-0007"
+      ],
+      "bank_entry_ids": [
+        "BANK-0007"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 3 payments INR 450.00 -> SETL-0007 -> BANK-0007"
+    },
+    {
+      "group_id": "G-0008",
+      "payment_ids": [
+        "PAY-0024",
+        "PAY-0025",
+        "PAY-0026"
+      ],
+      "settlement_ids": [
+        "SETL-0008"
+      ],
+      "bank_entry_ids": [
+        "BANK-0008"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean batch: 3 payments INR 300.00 -> SETL-0008 -> BANK-0008"
+    },
+    {
+      "group_id": "G-0009",
+      "payment_ids": [
+        "PAY-0027"
+      ],
+      "settlement_ids": [
+        "SETL-0009"
+      ],
+      "bank_entry_ids": [
+        "BANK-0009"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean single: PAY-0027 INR 85.00 -> SETL-0009 -> BANK-0009"
+    },
+    {
+      "group_id": "G-0010",
+      "payment_ids": [
+        "PAY-0028"
+      ],
+      "settlement_ids": [
+        "SETL-0010"
+      ],
+      "bank_entry_ids": [
+        "BANK-0010"
+      ],
+      "expected_status": "MATCHED",
+      "exception_type": null,
+      "explanation": "Clean single: PAY-0028 INR 125.00 -> SETL-0010 -> BANK-0010"
+    },
+    {
+      "group_id": "G-0011",
+      "payment_ids": [
+        "PAY-0029"
+      ],
+      "settlement_ids": [
+        "SETL-0011"
+      ],
+      "bank_entry_ids": [
+        "BANK-0011"
+      ],
+      "expected_status": "MISMATCHED",
+      "exception_type": "AMOUNT_MISMATCH",
+      "explanation": "Payment PAY-0029 INR 100.00 vs settlement SETL-0011 INR 90.00 (diff INR 10.00)"
+    },
+    {
+      "group_id": "G-0012",
+      "payment_ids": [
+        "PAY-0030"
+      ],
+      "settlement_ids": [
+        "SETL-0012"
+      ],
+      "bank_entry_ids": [
+        "BANK-0012"
+      ],
+      "expected_status": "MISMATCHED",
+      "exception_type": "AMOUNT_MISMATCH",
+      "explanation": "Payment PAY-0030 INR 150.00 vs settlement SETL-0012 INR 145.00 (diff INR 5.00)"
+    },
+    {
+      "group_id": "G-0013",
+      "payment_ids": [
+        "PAY-0031"
+      ],
+      "settlement_ids": [
+        "SETL-0013"
+      ],
+      "bank_entry_ids": [
+        "BANK-0013"
+      ],
+      "expected_status": "MISMATCHED",
+      "exception_type": "AMOUNT_MISMATCH",
+      "explanation": "Payment PAY-0031 INR 120.00 vs settlement SETL-0013 INR 110.00 (diff INR 10.00)"
+    },
+    {
+      "group_id": "G-0014",
+      "payment_ids": [
+        "PAY-0032"
+      ],
+      "settlement_ids": [
+        "SETL-0014"
+      ],
+      "bank_entry_ids": [
+        "BANK-0014"
+      ],
+      "expected_status": "MISMATCHED",
+      "exception_type": "TIMING_MISMATCH",
+      "explanation": "Payment PAY-0032 day 15 vs settlement SETL-0014 day 18 (3d gap)"
+    },
+    {
+      "group_id": "G-0015",
+      "payment_ids": [
+        "PAY-0033"
+      ],
+      "settlement_ids": [
+        "SETL-0015"
+      ],
+      "bank_entry_ids": [
+        "BANK-0015"
+      ],
+      "expected_status": "MISMATCHED",
+      "exception_type": "TIMING_MISMATCH",
+      "explanation": "Payment PAY-0033 day 16 vs settlement SETL-0015 day 20 (4d gap)"
+    },
+    {
+      "group_id": "G-0016",
+      "payment_ids": [
+        "PAY-0034"
+      ],
+      "settlement_ids": [
+        "SETL-0016"
+      ],
+      "bank_entry_ids": [
+        "BANK-0016"
+      ],
+      "expected_status": "MISMATCHED",
+      "exception_type": "TIMING_MISMATCH",
+      "explanation": "Payment PAY-0034 day 17 vs settlement SETL-0016 day 19 (2d gap)"
+    },
+    {
+      "group_id": "G-0017",
+      "payment_ids": [
+        "PAY-0035",
+        "PAY-0036"
+      ],
+      "settlement_ids": [
+        "SETL-0017"
+      ],
+      "bank_entry_ids": [],
+      "expected_status": "AMBIGUOUS",
+      "exception_type": "AMBIGUOUS",
+      "explanation": "Ambiguous: PAY-0035+PAY-0036 vs SETL-0017 (same amount INR 100.00, same timestamp, different order_ids)"
+    },
+    {
+      "group_id": "G-0018",
+      "payment_ids": [
+        "PAY-0037",
+        "PAY-0038"
+      ],
+      "settlement_ids": [
+        "SETL-0018"
+      ],
+      "bank_entry_ids": [],
+      "expected_status": "AMBIGUOUS",
+      "exception_type": "AMBIGUOUS",
+      "explanation": "Ambiguous: PAY-0037+PAY-0038 vs SETL-0018 (same amount INR 160.00, same timestamp, different order_ids)"
+    },
+    {
+      "group_id": "G-0019",
+      "payment_ids": [
+        "PAY-0039"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "MISSING",
+      "exception_type": "MISSING_SETTLEMENT",
+      "explanation": "Payment PAY-0039 INR 100.00 has no settlement"
+    },
+    {
+      "group_id": "G-0020",
+      "payment_ids": [
+        "PAY-0040"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "MISSING",
+      "exception_type": "MISSING_SETTLEMENT",
+      "explanation": "Payment PAY-0040 INR 150.00 has no settlement"
+    },
+    {
+      "group_id": "G-0021",
+      "payment_ids": [
+        "PAY-0041"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "MISSING",
+      "exception_type": "MISSING_SETTLEMENT",
+      "explanation": "Payment PAY-0041 INR 80.00 has no settlement"
+    },
+    {
+      "group_id": "G-0022",
+      "payment_ids": [
+        "PAY-0042"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "MISSING",
+      "exception_type": "MISSING_SETTLEMENT",
+      "explanation": "Payment PAY-0042 INR 200.00 has no settlement"
+    },
+    {
+      "group_id": "G-0023",
+      "payment_ids": [
+        "PAY-0043",
+        "PAY-0044"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "DUPLICATE",
+      "exception_type": "DUPLICATE",
+      "explanation": "Duplicates PAY-0043+PAY-0044 (order ORD-0043, INR 110.00)"
+    },
+    {
+      "group_id": "G-0024",
+      "payment_ids": [
+        "PAY-0045",
+        "PAY-0046"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "DUPLICATE",
+      "exception_type": "DUPLICATE",
+      "explanation": "Duplicates PAY-0045+PAY-0046 (order ORD-0045, INR 95.00)"
+    },
+    {
+      "group_id": "G-0025",
+      "payment_ids": [
+        "PAY-0047",
+        "PAY-0048"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "DUPLICATE",
+      "exception_type": "DUPLICATE",
+      "explanation": "Duplicates PAY-0047+PAY-0048 (order ORD-0047, INR 145.00)"
+    },
+    {
+      "group_id": "G-0026",
+      "payment_ids": [
+        "PAY-0049"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0049 INR 50.00 status=failed, no settlement expected"
+    },
+    {
+      "group_id": "G-0027",
+      "payment_ids": [
+        "PAY-0050"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0050 INR 30.00 status=failed, no settlement expected"
+    },
+    {
+      "group_id": "G-0028",
+      "payment_ids": [
+        "PAY-0051"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0051 INR 75.00 status=refunded, no settlement expected"
+    },
+    {
+      "group_id": "G-0029",
+      "payment_ids": [
+        "PAY-0052"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0052 INR 40.00 status=failed, no settlement expected"
+    },
+    {
+      "group_id": "G-0030",
+      "payment_ids": [
+        "PAY-0053"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0053 INR 65.00 status=refunded, no settlement expected"
+    },
+    {
+      "group_id": "G-0031",
+      "payment_ids": [
+        "PAY-0054"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0054 INR 25.00 status=failed, no settlement expected"
+    },
+    {
+      "group_id": "G-0032",
+      "payment_ids": [
+        "PAY-0055"
+      ],
+      "settlement_ids": [],
+      "bank_entry_ids": [],
+      "expected_status": "EXCLUDED",
+      "exception_type": "FAILED_OR_REFUNDED",
+      "explanation": "Payment PAY-0055 INR 85.00 status=refunded, no settlement expected"
+    },
+    {
+      "group_id": "G-0033",
+      "payment_ids": [],
+      "settlement_ids": [],
+      "bank_entry_ids": [
+        "BANK-0017"
+      ],
+      "expected_status": "UNMATCHED",
+      "exception_type": "ORPHAN_BANK_ENTRY",
+      "explanation": "Bank BANK-0017 (INR 35.00) - interest credit, no matching settlement"
+    },
+    {
+      "group_id": "G-0034",
+      "payment_ids": [],
+      "settlement_ids": [],
+      "bank_entry_ids": [
+        "BANK-0018"
+      ],
+      "expected_status": "UNMATCHED",
+      "exception_type": "ORPHAN_BANK_ENTRY",
+      "explanation": "Bank BANK-0018 (INR 25.00) - unknown incoming transfer"
+    },
+    {
+      "group_id": "G-0035",
+      "payment_ids": [],
+      "settlement_ids": [],
+      "bank_entry_ids": [
+        "BANK-0019"
+      ],
+      "expected_status": "UNMATCHED",
+      "exception_type": "ORPHAN_BANK_ENTRY",
+      "explanation": "Bank BANK-0019 (INR 120.00) - deposit with no matching settlement"
+    },
+    {
+      "group_id": "G-0036",
+      "payment_ids": [],
+      "settlement_ids": [],
+      "bank_entry_ids": [
+        "BANK-0020"
+      ],
+      "expected_status": "UNMATCHED",
+      "exception_type": "ORPHAN_BANK_ENTRY",
+      "explanation": "Bank BANK-0020 (INR 7.50) - bank adjustment with no settlement"
+    },
+    {
+      "group_id": "G-0037",
+      "payment_ids": [],
+      "settlement_ids": [],
+      "bank_entry_ids": [
+        "BANK-0021"
+      ],
+      "expected_status": "UNMATCHED",
+      "exception_type": "ORPHAN_BANK_ENTRY",
+      "explanation": "Bank BANK-0021 (INR 42.00) - reversed transaction with no settlement"
+    },
+    {
+      "group_id": "G-0038",
+      "payment_ids": [],
+      "settlement_ids": [],
+      "bank_entry_ids": [
+        "BANK-0022"
+      ],
+      "expected_status": "UNMATCHED",
+      "exception_type": "ORPHAN_BANK_ENTRY",
+      "explanation": "Bank BANK-0022 (INR 18.00) - merchant payout adjustment with no settlement"
+    }
+  ],
+  "expected_match_rate_record_level": 0.5053,
+  "expected_match_rate_group_level": 0.2632
+}

@@ -1,0 +1,268 @@
+[
+  {
+    "settlement_id": "SETL-0001",
+    "settlement_timestamp": "2026-08-21T08:00:00Z",
+    "amount_paise": 60000,
+    "currency": "INR",
+    "fee_paise": 1200,
+    "net_amount_paise": 58800,
+    "payment_refs": [
+      "PAY-0001",
+      "PAY-0002",
+      "PAY-0003",
+      "PAY-0004"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0001",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0002",
+    "settlement_timestamp": "2026-08-22T08:00:00Z",
+    "amount_paise": 60000,
+    "currency": "INR",
+    "fee_paise": 1200,
+    "net_amount_paise": 58800,
+    "payment_refs": [
+      "PAY-0005",
+      "PAY-0006",
+      "PAY-0007"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0002",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0003",
+    "settlement_timestamp": "2026-08-23T08:00:00Z",
+    "amount_paise": 47000,
+    "currency": "INR",
+    "fee_paise": 940,
+    "net_amount_paise": 46060,
+    "payment_refs": [
+      "PAY-0008",
+      "PAY-0009",
+      "PAY-0010",
+      "PAY-0011"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0003",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0004",
+    "settlement_timestamp": "2026-08-24T08:00:00Z",
+    "amount_paise": 33500,
+    "currency": "INR",
+    "fee_paise": 670,
+    "net_amount_paise": 32830,
+    "payment_refs": [
+      "PAY-0012",
+      "PAY-0013",
+      "PAY-0014"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0004",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0005",
+    "settlement_timestamp": "2026-08-25T08:00:00Z",
+    "amount_paise": 33000,
+    "currency": "INR",
+    "fee_paise": 660,
+    "net_amount_paise": 32340,
+    "payment_refs": [
+      "PAY-0015",
+      "PAY-0016",
+      "PAY-0017"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0005",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0006",
+    "settlement_timestamp": "2026-08-26T08:00:00Z",
+    "amount_paise": 54000,
+    "currency": "INR",
+    "fee_paise": 1080,
+    "net_amount_paise": 52920,
+    "payment_refs": [
+      "PAY-0018",
+      "PAY-0019",
+      "PAY-0020"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0006",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0007",
+    "settlement_timestamp": "2026-08-27T08:00:00Z",
+    "amount_paise": 45000,
+    "currency": "INR",
+    "fee_paise": 900,
+    "net_amount_paise": 44100,
+    "payment_refs": [
+      "PAY-0021",
+      "PAY-0022",
+      "PAY-0023"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0007",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0008",
+    "settlement_timestamp": "2026-08-28T08:00:00Z",
+    "amount_paise": 30000,
+    "currency": "INR",
+    "fee_paise": 600,
+    "net_amount_paise": 29400,
+    "payment_refs": [
+      "PAY-0024",
+      "PAY-0025",
+      "PAY-0026"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0008",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0009",
+    "settlement_timestamp": "2026-08-29T08:00:00Z",
+    "amount_paise": 8500,
+    "currency": "INR",
+    "fee_paise": 170,
+    "net_amount_paise": 8330,
+    "payment_refs": [
+      "PAY-0027"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0009",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0010",
+    "settlement_timestamp": "2026-08-30T08:00:00Z",
+    "amount_paise": 12500,
+    "currency": "INR",
+    "fee_paise": 250,
+    "net_amount_paise": 12250,
+    "payment_refs": [
+      "PAY-0028"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0010",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0011",
+    "settlement_timestamp": "2026-09-02T08:00:00Z",
+    "amount_paise": 9000,
+    "currency": "INR",
+    "fee_paise": 180,
+    "net_amount_paise": 8820,
+    "payment_refs": [
+      "PAY-0029"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0011",
+    "is_known_exception": true
+  },
+  {
+    "settlement_id": "SETL-0012",
+    "settlement_timestamp": "2026-09-03T08:00:00Z",
+    "amount_paise": 14500,
+    "currency": "INR",
+    "fee_paise": 290,
+    "net_amount_paise": 14210,
+    "payment_refs": [
+      "PAY-0030"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0012",
+    "is_known_exception": true
+  },
+  {
+    "settlement_id": "SETL-0013",
+    "settlement_timestamp": "2026-09-04T08:00:00Z",
+    "amount_paise": 11000,
+    "currency": "INR",
+    "fee_paise": 220,
+    "net_amount_paise": 10780,
+    "payment_refs": [
+      "PAY-0031"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0013",
+    "is_known_exception": true
+  },
+  {
+    "settlement_id": "SETL-0014",
+    "settlement_timestamp": "2026-09-07T08:00:00Z",
+    "amount_paise": 8000,
+    "currency": "INR",
+    "fee_paise": 160,
+    "net_amount_paise": 7840,
+    "payment_refs": [
+      "PAY-0032"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0014",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0015",
+    "settlement_timestamp": "2026-09-09T08:00:00Z",
+    "amount_paise": 13000,
+    "currency": "INR",
+    "fee_paise": 260,
+    "net_amount_paise": 12740,
+    "payment_refs": [
+      "PAY-0033"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0015",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0016",
+    "settlement_timestamp": "2026-09-08T08:00:00Z",
+    "amount_paise": 7000,
+    "currency": "INR",
+    "fee_paise": 140,
+    "net_amount_paise": 6860,
+    "payment_refs": [
+      "PAY-0034"
+    ],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0016",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0017",
+    "settlement_timestamp": "2026-09-16T08:00:00Z",
+    "amount_paise": 10000,
+    "currency": "INR",
+    "fee_paise": 200,
+    "net_amount_paise": 9800,
+    "payment_refs": [],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0017",
+    "is_known_exception": false
+  },
+  {
+    "settlement_id": "SETL-0018",
+    "settlement_timestamp": "2026-09-17T08:00:00Z",
+    "amount_paise": 16000,
+    "currency": "INR",
+    "fee_paise": 320,
+    "net_amount_paise": 15680,
+    "payment_refs": [],
+    "settlement_status": "settled",
+    "gateway_settlement_reference": "GWSETL-0018",
+    "is_known_exception": false
+  }
+]
