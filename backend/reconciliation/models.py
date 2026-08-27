@@ -80,6 +80,7 @@ class SignalType(str, Enum):
     BATCH_AMOUNT_MATCH = "BATCH_AMOUNT_MATCH"
     DUPLICATE_IDENTIFIER = "DUPLICATE_IDENTIFIER"
     MISSING_RECORD = "MISSING_RECORD"
+    TIMESTAMP_EXCEEDED = "TIMESTAMP_EXCEEDED"
 
 
 # ---------------------------------------------------------------------------
