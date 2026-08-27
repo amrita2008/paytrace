@@ -11,6 +11,10 @@ import itertools
 from collections import defaultdict
 
 from backend.models.canonical import PaymentStatus
+from backend.reconciliation.batch import (
+    verify_settlement_arithmetic,
+    decompose_settlement,
+)
 from backend.reconciliation.matching import (
     build_bank_by_ref,
     build_payment_index,
@@ -126,33 +130,11 @@ class ExactReconciliationEngine:
                         ref_id, _PTS_MISSING, f"E{len(evidence_list)+1}",
                     ))
 
-            # Amount verification
-            ref_sum = sum(p.amount_paise for p in referenced_payments)
-            if ref_sum == s.amount_paise:
-                signal = SignalType.BATCH_AMOUNT_MATCH if len(referenced_payments) > 1 else SignalType.EXACT_AMOUNT
-                pts = _PTS_BATCH_AMOUNT if len(referenced_payments) > 1 else _PTS_EXACT_AMOUNT
-                evidence_list.append(make_evidence(
-                    signal, s.settlement_id,
-                    f"{ref_sum}=={s.amount_paise}", pts,
-                    f"E{len(evidence_list)+1}",
-                ))
-            elif referenced_payments:
+            # Batch arithmetic verification (amount, fee/net, currency)
+            arithmetic_valid, arithmetic_evidence = verify_settlement_arithmetic(s, referenced_payments)
+            evidence_list.extend(arithmetic_evidence)
+            if not arithmetic_valid:
                 has_amount_mismatch = True
-                evidence_list.append(make_evidence(
-                    SignalType.EXACT_AMOUNT, s.settlement_id,
-                    f"{ref_sum}!={s.amount_paise}", _PTS_MISSING,
-                    f"E{len(evidence_list)+1}",
-                ))
-
-            # Single-payment amount verification
-            if len(referenced_payments) == 1:
-                pay = referenced_payments[0]
-                if pay.amount_paise == s.amount_paise:
-                    evidence_list.append(make_evidence(
-                        SignalType.EXACT_AMOUNT, pay.payment_id,
-                        str(pay.amount_paise), _PTS_EXACT_AMOUNT,
-                        f"E{len(evidence_list)+1}",
-                    ))
 
             # Duplicate evidence for referenced payments (DO NOT add unreferenced partners)
             for pay in referenced_payments:
@@ -242,6 +224,86 @@ class ExactReconciliationEngine:
                 human_review_required=human_review,
             ))
 
+        # Step 1.5: Batch decomposition for settlements with empty payment_refs
+        internal_arith_by_setl: dict[str, list[MatchEvidence]] = {}
+        for s in settlements:
+            if s.settlement_id in assigned_settlements:
+                continue
+            if s.payment_refs:
+                continue
+
+            # Validate settlement internal arithmetic (amount - fee == net)
+            internal_valid, internal_evidence = verify_settlement_arithmetic(s, [])
+
+            candidates = [
+                p for p in payments
+                if p.payment_id not in assigned_payments
+            ]
+
+            decomp = decompose_settlement(s, candidates, _SETTLEMENT_TIMING_WINDOW_SECONDS)
+            decomp.evidence.extend(internal_evidence)
+
+            if decomp.status == "matched":
+                # Assign matched payments
+                for p in decomp.matched_payments:
+                    assigned_payments.add(p.payment_id)
+
+                # Bank entry verification
+                bank = bank_by_ref.get(s.settlement_id)
+                bank_ids = []
+                if bank:
+                    assigned_banks.add(bank.bank_entry_id)
+                    bank_ids = [bank.bank_entry_id]
+                    if bank.amount_paise == s.net_amount_paise:
+                        decomp.evidence.append(make_evidence(
+                            SignalType.EXACT_AMOUNT, bank.bank_entry_id,
+                            str(bank.amount_paise), _PTS_EXACT_AMOUNT,
+                            f"E{len(decomp.evidence)+1}",
+                        ))
+                    else:
+                        decomp.evidence.append(make_evidence(
+                            SignalType.EXACT_AMOUNT, bank.bank_entry_id,
+                            f"{bank.amount_paise}!={s.net_amount_paise}", _PTS_MISSING,
+                            f"E{len(decomp.evidence)+1}",
+                        ))
+
+                assigned_settlements.add(s.settlement_id)
+                results.append(ReconciliationResult(
+                    group_id=f"GRP-{next(group_counter):04d}",
+                    status=MatchStatus.MATCHED,
+                    payment_ids=[p.payment_id for p in decomp.matched_payments],
+                    settlement_ids=[s.settlement_id],
+                    bank_entry_ids=bank_ids,
+                    match_score=min(sum(e.points for e in decomp.evidence), _MAX_SCORE),
+                    match_method=MatchMethod.BATCH_SETTLE,
+                    exception_type=None,
+                    resolution_status=ResolutionStatus.RESOLVED,
+                    evidence=decomp.evidence,
+                    evidence_summary=f"Batch decomposition matched {len(decomp.matched_payments)} payment(s) to {s.settlement_id}.",
+                    human_review_required=False,
+                ))
+
+            elif decomp.status == "timing_mismatch":
+                assigned_settlements.add(s.settlement_id)
+                results.append(ReconciliationResult(
+                    group_id=f"GRP-{next(group_counter):04d}",
+                    status=MatchStatus.MISMATCHED,
+                    payment_ids=[p.payment_id for p in decomp.matched_payments],
+                    settlement_ids=[s.settlement_id],
+                    bank_entry_ids=[],
+                    match_score=None,
+                    match_method=MatchMethod.BATCH_SETTLE,
+                    exception_type=ExceptionType.TIMING_MISMATCH,
+                    resolution_status=ResolutionStatus.OPEN,
+                    evidence=decomp.evidence,
+                    evidence_summary=f"Batch decomposition found matching payments for {s.settlement_id} but timing window exceeded.",
+                    human_review_required=True,
+                ))
+
+            # "ambiguous" and "no_match" fall through to Step 2 (AMBIGUOUS)
+            # Store internal arithmetic evidence for Step 2
+            internal_arith_by_setl[s.settlement_id] = internal_evidence
+
         # Step 2: Settlements with empty payment_refs -> AMBIGUOUS
         for s in settlements:
             if s.settlement_id in assigned_settlements:
@@ -255,6 +317,9 @@ class ExactReconciliationEngine:
                     "NONE", _PTS_MISSING, "E1",
                 ),
             ]
+            # Include internal arithmetic evidence from Step 1.5
+            if s.settlement_id in internal_arith_by_setl:
+                evidence_list.extend(internal_arith_by_setl[s.settlement_id])
 
             bank = bank_by_ref.get(s.settlement_id)
             bank_ids = []
