@@ -4,6 +4,7 @@ FastAPI application entry point.
 """
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from backend.config import settings
@@ -35,6 +36,22 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
 )
+
+# CORS — restricted to Vite dev origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
+
+# API routes
+from backend.api.routes import router as api_router  # noqa: E402
+app.include_router(api_router)
+
+from backend.api.ai_routes import router as ai_router  # noqa: E402
+app.include_router(ai_router)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["health"])
