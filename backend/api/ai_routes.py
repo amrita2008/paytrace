@@ -18,42 +18,21 @@ router = APIRouter(prefix="/api/v1/reconciliation", tags=["ai-investigation"])
 
 
 def _get_provider():
-    """Get LLM provider from existing Phase 5 architecture.
+    """Get LLM provider.
 
-    Uses OpenAIProvider if PAYTRACE_LLM_API_KEY is configured.
-    Falls back to _NullProvider (always returns safe fallback).
+    Ollama is the default local provider.
+    OpenAI can still be selected explicitly with PAYTRACE_LLM_PROVIDER=openai.
     """
-    if os.getenv("PAYTRACE_LLM_API_KEY"):
+
+    provider_name = os.getenv("PAYTRACE_LLM_PROVIDER", "").lower().strip()
+
+    if provider_name == "openai":
         from backend.ai.providers.openai_provider import OpenAIProvider
-
         return OpenAIProvider()
-    return _NullProvider()
 
-
-class _NullProvider:
-    """Safe fallback when no LLM API key is configured.
-
-    Reuses the existing LLMProviderInterface contract.
-    Always returns a safe fallback response. Never makes network calls.
-    """
-
-    @property
-    def provider_name(self) -> str:
-        return "none"
-
-    @property
-    def model_name(self) -> str:
-        return "unavailable"
-
-    def complete(self, prompt: str):  # type: ignore[override]
-        from backend.ai.models import ProviderErrorCategory
-        from backend.ai.provider import ProviderResponse
-
-        return ProviderResponse(
-            content="",
-            success=False,
-            error_category=ProviderErrorCategory.UNAVAILABLE,
-        )
+    # Ollama is the default for PayTrace.
+    from backend.ai.providers.ollama_provider import OllamaProvider
+    return OllamaProvider()
 
 
 @router.get(
@@ -74,8 +53,12 @@ def investigate_group(group_id: str) -> InvestigationResponseSchema:
         if r.group_id == group_id:
             target = r
             break
+
     if target is None:
-        raise HTTPException(status_code=404, detail=f"Group {group_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Group {group_id} not found",
+        )
 
     # 2. Must have an exception to investigate
     from backend.reconciliation.models import MatchStatus
@@ -83,18 +66,25 @@ def investigate_group(group_id: str) -> InvestigationResponseSchema:
     if target.status == MatchStatus.MATCHED and target.exception_type is None:
         raise HTTPException(
             status_code=400,
-            detail="No exception to investigate — this group is matched with no exceptions.",
+            detail="No exception to investigate -- this group is matched with no exceptions.",
         )
 
     # 3. Get normalized records and run investigation
     payments, settlements, banks = get_normalized_data()
+
     from backend.ai.investigation_service import InvestigationService
 
     service = InvestigationService(_get_provider())
-    response = service.investigate(target, payments, settlements, banks)
+    response = service.investigate(
+        target,
+        payments,
+        settlements,
+        banks,
+    )
 
     # 4. Serialize using API schema
     result = response.result
+
     return InvestigationResponseSchema(
         investigation_id=response.record.investigation_id,
         group_id=response.record.group_id,
@@ -108,8 +98,12 @@ def investigate_group(group_id: str) -> InvestigationResponseSchema:
             )
             for f in (result.observed_facts if result else [])
         ],
-        likely_explanation=result.likely_explanation if result else None,
-        unresolved_questions=result.unresolved_questions if result else [],
+        likely_explanation=(
+            result.likely_explanation if result else None
+        ),
+        unresolved_questions=(
+            result.unresolved_questions if result else []
+        ),
         recommended_action=response.record.recommendation,
         confidence=response.record.confidence,
         requires_human_review=response.record.requires_human_review,
